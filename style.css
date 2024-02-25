@@ -1,0 +1,43 @@
+body{
+    background-color: rgb(255, 255, 255);
+    margin: 0;
+}
+.top-bar{
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+
+    padding-right: 50px;
+}   
+.top-bar span{
+    font-size: xx-large;
+    display: flex;
+}
+.fav-container{
+    background-color: rgb(247, 228, 215);
+}
+.heading{
+    display: flex;
+    justify-content: center;
+}
+.horizontal-flex{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+
+    height: 60px;
+    font-family: 'Source Code Pro' , monospace;
+    font-size: 1.2em;
+    background-color: rgb(139, 135, 135) ;
+}
+button{
+    height: 30px;
+    width: 40px;  
+    font-size: large;
+    color: white;
+    border: solid 2px rgb(162, 155, 155);
+}
