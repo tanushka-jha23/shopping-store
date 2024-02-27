@@ -27,12 +27,13 @@ body{
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 40px;
+    gap: 20px;
 
     height: 60px;
     font-family: 'Source Code Pro' , monospace;
     font-size: 1.2em;
     background-color: rgb(139, 135, 135) ;
+    border: solid 1px rgb(176, 175, 175);
 }
 button{
     height: 30px;
