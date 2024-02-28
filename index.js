@@ -1,5 +1,5 @@
 let state = {
-    itemlist : [Mac, iPhone, iPad, appleWatch, Airpods, AirTag, HomePod, TV4K, Accessories],
+    itemlist : ["Mac", "iPhone", "iPad", "appleWatch", "Airpods", "AirTag", "HomePod", "TV4K", "Accessories"],
     wishlist : [],
 
     subscribers: [],
@@ -20,24 +20,43 @@ let state = {
     }
 }
 
-const wishList = document.querySelector(".wishlist");
-const like = document.querySelectorAll(".like");
-const itemList = document.querySelectorAll("#item");
+const itemList = document.querySelector(".item-list")
+const wishList = document.querySelector(".wishlist")
+const like = document.querySelectorAll(".like")
+
+
+const product = (itemName, itemID) =>{
+    let item = document.createElement('div')
+    item.className = "horizontal-flex"
+    item.id = "item"
+    let itemname = document.createElement('p')
+    itemname.textcontent = itemName
+    let favorite = document.createElement('span')
+    favorite.className = "material-symbols-outlined like"
+    favorite.id = itemID
+    item.appendChild(itemname)
+    item.appendChild(favorite)
+
+    return item
+}
+
+let product1 = product("apple", 1)
+itemList.appendChild(product1)
 
 const addItemList = () => {
-    wishList = ""
+    wishList.innerHTML = ""
     let i = 0
     while(i < state.wishlist.length){
-        let items = document.createElement("p")
+        let items = document.createElement('p')
         items.textcontent = state.wishlist[i]
         wishList.appendChild(items)
 
         i = i + 1
     }
 }
-subscribe(addItemList)
+state.subscribe(addItemList)
 
 let i = 0 
 for(i = 0; i < like.length; i++){
-    like[i].addEventListener("click", additem(parseInt(getElementsByClassName("like").id)))
+    like[i].addEventListener("click", additem(parseInt(like[i].id)));
 }
