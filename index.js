@@ -1,6 +1,7 @@
 let state = {
     itemlist : ["Mac", "iPhone", "iPad", "appleWatch", "Airpods", "AirTag", "HomePod", "TV4K", "Accessories"],
     wishlist : [],
+    switch: 0,
 
     subscribers: [],
     subscribe(f){
@@ -18,21 +19,23 @@ let state = {
         this.wishlist.push(this.itemList[i])
         this.publish()
     }
+
 }
 
-const itemList = document.querySelector(".item-list")
-const wishList = document.querySelector(".wishlist")
 const like = document.querySelectorAll(".like")
+const favorite = document.querySelector(".fav")
+const itemContainer = document.querySelector(".item-container")
 
-
-const product = (itemName, itemID) =>{
+//composible functions
+const product = (itemName, itemID) => {
     let item = document.createElement('div')
     item.className = "horizontal-flex"
     item.id = "item"
     let itemname = document.createElement('p')
-    itemname.textcontent = itemName
+    itemname.textContent = itemName
     let favorite = document.createElement('span')
     favorite.className = "material-symbols-outlined like"
+    favorite.textContent = "favorite"
     favorite.id = itemID
     item.appendChild(itemname)
     item.appendChild(favorite)
@@ -40,23 +43,18 @@ const product = (itemName, itemID) =>{
     return item
 }
 
-let product1 = product("apple", 1)
-itemList.appendChild(product1)
-
-const addItemList = () => {
-    wishList.innerHTML = ""
-    let i = 0
-    while(i < state.wishlist.length){
-        let items = document.createElement('p')
-        items.textcontent = state.wishlist[i]
-        wishList.appendChild(items)
-
-        i = i + 1
+const productList = (productArray) => {
+    let j
+    for(j = 0; j < productArray.length; j++){
+        let productContainer = product(productArray[j], j)
+        itemContainer.appendChild(productContainer)
     }
 }
-state.subscribe(addItemList)
+subscribe(productList)
 
 let i = 0 
 for(i = 0; i < like.length; i++){
     like[i].addEventListener("click", additem(parseInt(like[i].id)));
 }
+
+
