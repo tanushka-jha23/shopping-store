@@ -24,7 +24,6 @@ let state = {
 
 const like = document.querySelectorAll(".like")
 const favorite = document.querySelector(".fav")
-const itemContainer = document.querySelector(".item-container")
 
 //composible functions
 const product = (itemName, itemID) => {
@@ -44,6 +43,7 @@ const product = (itemName, itemID) => {
 }
 
 const productList = (productArray) => {
+    let itemContainer = document.createElement('div')
     let j
     for(j = 0; j < productArray.length; j++){
         let productContainer = product(productArray[j], j)
