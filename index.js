@@ -1,7 +1,7 @@
 let state = {
     itemlist : ["Mac", "iPhone", "iPad", "appleWatch", "Airpods", "AirTag", "HomePod", "TV4K", "Accessories"],
     wishlist : [],
-    switch: 0,
+    switch: false,
 
     subscribers: [],
     subscribe(f){
@@ -18,12 +18,17 @@ let state = {
     additem(i) {
         this.wishlist.push(this.itemList[i])
         this.publish()
-    }
+    },
 
+    changeswitch(){
+        this.switch = !(this.switch)
+        this.publish()
+    }
 }
 
 const like = document.querySelectorAll(".like")
 const favorite = document.querySelector(".fav")
+const itemSuperContainer = document.querySelector(".item-super-container")
 
 //composible functions
 const product = (itemName, itemID) => {
@@ -48,13 +53,28 @@ const productList = (productArray) => {
     for(j = 0; j < productArray.length; j++){
         let productContainer = product(productArray[j], j)
         itemContainer.appendChild(productContainer)
+
+    }
+    return itemContainer
+}
+
+const renderProductList = () =>{
+    itemSuperContainer.innerHTML = ""
+    if(state.switch == true){
+        itemSuperContainer.appendChild(productList(state.wishlist))
+    }
+    else{
+        itemSuperContainer.appendChild(productList(state.itemlist))
     }
 }
-subscribe(productList)
+state.subscribe(renderProductList)
 
 let i = 0 
 for(i = 0; i < like.length; i++){
-    like[i].addEventListener("click", additem(parseInt(like[i].id)));
+    like[i].addEventListener("click", state.additem(parseInt(like[i].id)));
 }
 
+favorite.addEventListener("click", state.changeswitch())
+
+state.publish()
 
