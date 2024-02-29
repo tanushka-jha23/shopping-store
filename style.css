@@ -18,6 +18,14 @@ body{
 .fav-container{
     background-color: rgb(247, 228, 215);
 }
+.fav-item-number{
+    font-size: larger;
+    padding: 10px;
+    margin-left: 10px;
+    background-color: rgb(186, 186, 105);
+    font-family: 'Source Code Pro', monospace;
+
+}
 .heading{
     display: flex;
     justify-content: center;

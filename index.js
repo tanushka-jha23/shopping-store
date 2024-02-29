@@ -16,7 +16,7 @@ let state = {
     },
 
     additem(i) {
-        this.wishlist.push(this.itemList[i])
+        this.wishlist.push(this.itemlist[i])
         this.publish()
     },
 
@@ -24,13 +24,15 @@ let state = {
         this.switch = !(this.switch)
         this.publish()
     }
+
 }
 
 const like = document.querySelectorAll(".like")
 const favorite = document.querySelector(".fav")
 const itemSuperContainer = document.querySelector(".item-super-container")
+const favItemNumber = document.querySelector(".fav-item-number")
 
-//composible functions
+//composible function
 const product = (itemName, itemID) => {
     let item = document.createElement('div')
     item.className = "horizontal-flex"
@@ -41,12 +43,13 @@ const product = (itemName, itemID) => {
     favorite.className = "material-symbols-outlined like"
     favorite.textContent = "favorite"
     favorite.id = itemID
+    favorite.addEventListener("click", () => {state.additem(favorite.id)})
     item.appendChild(itemname)
     item.appendChild(favorite)
 
     return item
 }
-
+//parent composible function
 const productList = (productArray) => {
     let itemContainer = document.createElement('div')
     let j
@@ -58,9 +61,9 @@ const productList = (productArray) => {
     return itemContainer
 }
 
-const renderProductList = () =>{
+const renderProductList = () => {
     itemSuperContainer.innerHTML = ""
-    if(state.switch == true){
+    if(state.switch){
         itemSuperContainer.appendChild(productList(state.wishlist))
     }
     else{
@@ -69,12 +72,12 @@ const renderProductList = () =>{
 }
 state.subscribe(renderProductList)
 
-let i = 0 
-for(i = 0; i < like.length; i++){
-    like[i].addEventListener("click", state.additem(parseInt(like[i].id)));
+const wishlistItem = () => {
+    favItemNumber.textContent = state.wishlist.length
 }
+state.subscribe(wishlistItem)
 
-favorite.addEventListener("click", state.changeswitch())
+favorite.addEventListener("click", () => {state.changeswitch()})
 
 state.publish()
 
